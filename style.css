@@ -560,3 +560,71 @@ margin-top: 10px;
     display: block;
     margin-left: auto;
 }
+
+@media (max-width: 768px) {
+
+  /* 히어로 텍스트 */
+  .hero-text-area {
+    top: 120px;
+    left: 20px;
+  }
+
+  .hero-title .main-text {
+    font-size: 32px;
+  }
+
+  .hero-title .sub-text {
+    font-size: 16px;
+  }
+
+  /* 히어로 이미지 높이 */
+  .hero-image-frame {
+    height: 40vh;
+  }
+
+  /* what we do */
+  .whatwedo-desc {
+    font-size: 18px;
+  }
+
+  /* value 섹션 세로로 변경 */
+  .value-sticky-wrapper {
+    flex-direction: column;
+  }
+
+  .value-left,
+  .value-right {
+    width: 100%;
+  }
+
+  .value-item {
+    padding: 30px 20px;
+  }
+
+  /* 파트너 로고 */
+  .logo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  /* contact */
+  .contact-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-mail {
+    font-size: 24px;
+  }
+
+  /* footer */
+  .footer-bottom-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .footer-logo-box {
+    width: 100%;
+  }
+}
