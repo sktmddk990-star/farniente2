@@ -8,18 +8,17 @@
     --header-height: 80px;
 }
 
-/* 기본 설정 */
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
+/* ✅ overflow-x: hidden 제거 - Sticky 작동 가능하게 */
 body, html {
     margin: 0;
     padding: 0;
     width: 100%;
     height: auto;
     background-color: #fff;
-    overflow-x: hidden;
 }
 
 /* ==========================================
@@ -65,10 +64,10 @@ body, html {
 }
 
 /* ==========================================
-   히어로 섹션 (원본 그대로)
+   HERO SECTION
 ========================================== */
 .hero-section {
-    height: 250vh;
+    height: 140vh;
     position: relative;
     background-color: #ffffff;
 }
@@ -78,10 +77,6 @@ body, html {
     top: 0;
     height: 100vh;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 0;
     overflow: hidden;
 }
 
@@ -89,7 +84,7 @@ body, html {
     position: absolute;
     top: 430px;
     left: 30px;
-    width: 100%;
+    width: calc(100% - 60px);
     z-index: 10;
 }
 
@@ -117,63 +112,33 @@ body, html {
 .hero-image-container {
     width: 100%;
     height: 100vh;
-    display: flex;
-    align-items: flex-end;
+    position: relative;
     filter: grayscale(100%);
 }
 
 .hero-image-frame {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 30vh;
     overflow: hidden;
-    position: relative;
-    margin-top: auto;
-    transition: none;
 }
 
 .hero-image-frame img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
     object-fit: cover;
-    object-position: center;
-    transition: none;
 }
 
 /* ==========================================
-   비전 마퀴
-========================================== */
-.vision-bridge-section {
-    width: 100%;
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffffff;
-    overflow: hidden;
-}
-
-.marquee-wrapper {
-    width: 100%;
-}
-
-.vision-text {
-    display: flex;
-    white-space: nowrap;
-    font-family: 'PP Neue Montreal', sans-serif;
-    font-weight: 600;
-    font-size: 2vw;
-    color: #1a1a1a;
-}
-
-.vision-text span {
-    padding-right: 20px;
-}
-
-/* ==========================================
-   What We Do
+   WHAT WE DO
 ========================================== */
 .whatwedo-section {
-    padding: 500px 20px;
+    padding: 400px 20px;
 }
 
 .whatwedo-inner {
@@ -195,15 +160,16 @@ body, html {
 }
 
 /* ==========================================
-   Value 섹션 (원본 그대로)
+   VALUE SECTION - ✅ 고정 + 디자인 복구
 ========================================== */
 .value-section {
     position: relative;
     width: 100%;
-    height: 400vh;
+    height: 300vh;
     background-color: #000;
 }
 
+/* ✅ Sticky 강제 고정 */
 .value-sticky-wrapper {
     position: sticky;
     top: 0;
@@ -211,8 +177,8 @@ body, html {
     width: 100%;
     height: 100vh;
     display: flex;
-    flex-direction: row;
-    overflow: hidden;
+    overflow: visible;
+    z-index: 50;
 }
 
 .value-left {
@@ -223,13 +189,6 @@ body, html {
     padding: 0;
     background-color: #000;
     color: #fff;
-}
-
-.value-left-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
 }
 
 .left-top {
@@ -286,6 +245,7 @@ body, html {
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
 }
 
 .value-item {
@@ -333,16 +293,18 @@ body, html {
     margin-top: 20px;
 }
 
+/* ✅ 원래 색상 복구 */
 .item-01 { background-color: #f3f3f3; }
 .item-02 { background-color: #ebebeb; }
 .item-03 { background-color: #dddddd; }
 
 /* ==========================================
-   Partners 섹션
+   PARTNERS SECTION
 ========================================== */
 .partners-section {
     padding: 300px 0;
     text-align: center;
+    background-color: #ffffff;
 }
 
 .partners-tabs {
@@ -374,6 +336,7 @@ body, html {
     grid-template-columns: repeat(5, 1fr);
     gap: 80px;
     align-items: center;
+    padding: 0 40px;
 }
 
 .logo-grid.active {
@@ -401,17 +364,17 @@ body, html {
 }
 
 /* ==========================================
-   Contact 섹션
+   CONTACT SECTION
 ========================================== */
 .contact-area {
     padding: 120px 30px;
-    background-color: var(--bg-color);
 }
 
-.contact-line {
-    width: 100%;
+.contact-divider {
+    width: 0%;
     height: 1px;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: width 0.1s ease-out;
 }
 
 .contact-wrapper {
@@ -424,13 +387,13 @@ body, html {
     align-items: center;
     padding: 60px 0;
     text-decoration: none;
-    color: var(--text-color);
+    color: #1a1a1a;
     position: relative;
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .contact-item:first-child {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .contact-item:hover {
@@ -440,14 +403,22 @@ body, html {
 .contact-item::before {
     content: '';
     position: absolute;
-    bottom: 0; left: 0; width: 100%; height: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
     background-color: #000;
     z-index: -1;
     transition: height 0.4s ease;
 }
 
-.contact-item:hover::before { height: 100%; }
-.contact-item:hover { color: #fff; }
+.contact-item:hover::before {
+    height: 100%;
+}
+
+.contact-item:hover {
+    color: #fff;
+}
 
 .contact-info {
     display: flex;
@@ -457,7 +428,6 @@ body, html {
 }
 
 .contact-cat {
-    font-family: 'Instrument Sans', sans-serif;
     font-size: 15px;
     font-weight: 500;
     display: inline-block;
@@ -467,7 +437,6 @@ body, html {
 }
 
 .contact-mail {
-    font-family: 'Instrument Sans', sans-serif;
     font-size: 4vw;
     font-weight: 700;
     margin: 0;
@@ -487,7 +456,7 @@ body, html {
 }
 
 /* ==========================================
-   Footer
+   FOOTER
 ========================================== */
 .main-footer {
     background-color: #111;
@@ -568,286 +537,17 @@ body, html {
 }
 
 /* ==========================================
-   LAPTOP (1024px ~ 1440px)
-========================================== */
-@media (max-width: 1440px) {
-    .hero-title .main-text {
-        font-size: clamp(52px, 5.5vw, 72px);
-    }
-    .hero-title .sub-text {
-        font-size: clamp(16px, 1.6vw, 22px);
-    }
-    .contact-mail {
-        font-size: clamp(30px, 3.8vw, 56px);
-    }
-}
-
-/* ==========================================
-   TABLET (768px ~ 1024px)
+   RESPONSIVE OVERRIDES
 ========================================== */
 @media (max-width: 1024px) {
-    .hero-text-area {
-        top: 260px;
-        left: 24px;
-        width: calc(100% - 48px);
-    }
-    .hero-title .main-text {
-        font-size: clamp(40px, 5.5vw, 60px);
-    }
-    .hero-title .sub-text {
-        font-size: clamp(14px, 2vw, 18px);
-        margin-top: 14px;
-    }
-    .whatwedo-section {
-        padding: 300px 40px;
-    }
-    .whatwedo-desc {
-        font-size: 22px;
-    }
-    .value-main-title {
-        font-size: 30px;
-    }
-    .value-main-desc {
-        font-size: 15px;
-    }
-    .value-item {
-        padding: 0 30px;
-    }
-    .card-title {
-        font-size: 22px;
-    }
-    .card-desc {
-        font-size: 15px;
-    }
-    .partners-section {
-        padding: 200px 40px;
-    }
-    .logo-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 50px;
-    }
-    .contact-info {
-        gap: 60px;
-    }
-    .contact-mail {
-        font-size: clamp(22px, 3.5vw, 40px);
-    }
-    .main-footer {
-        padding: 40px 40px 50px;
-        min-height: 600px;
-    }
-    .footer-logo-box {
-        width: 55%;
-    }
+    .logo-grid { grid-template-columns: repeat(4, 1fr); gap: 50px; }
 }
 
-/* ==========================================
-   MOBILE (~ 768px)
-   ★ 히어로 sticky/height → 절대 건드리지 않음 (JS 동작 보장)
-   ★ value sticky/height(400vh) → 절대 건드리지 않음 (JS 동작 보장)
-   ★ 레이아웃·폰트·간격만 조정
-========================================== */
 @media (max-width: 768px) {
-
-    /* 헤더 */
-    .header-inner {
-        padding: 16px 20px;
-    }
-    .logo-img {
-        height: 20px;
-    }
-
-    /* 히어로 텍스트 위치·크기만 조정 */
-    .hero-text-area {
-        top: 120px;
-        left: 20px;
-        width: calc(100% - 40px);
-    }
-    .hero-title .main-text {
-        font-size: clamp(26px, 7.5vw, 40px);
-        line-height: 1.1;
-    }
-    .hero-title .sub-text {
-        font-size: clamp(12px, 3.5vw, 15px);
-        margin-top: 10px;
-    }
-
-    /* 비전 마퀴 */
-    .vision-bridge-section {
-        height: auto;
-        min-height: 50px;
-        padding: 14px 0;
-    }
-    .vision-text {
-        font-size: clamp(13px, 4.5vw, 18px);
-    }
-
-    /* what we do */
-    .whatwedo-section {
-        padding: 80px 24px;
-    }
-    .whatwedo-title {
-        font-size: 15px;
-        margin-bottom: 18px;
-    }
-    .whatwedo-desc {
-        font-size: clamp(15px, 4vw, 19px);
-        line-height: 1.8;
-        word-break: keep-all;
-    }
-
-    /* value — sticky/height 유지, 방향만 column으로 */
-    .value-sticky-wrapper {
-        flex-direction: column;
-    }
-    .value-left {
-        width: 100%;
-        flex: 0 0 40%;
-    }
-    .left-top {
-        padding: 52px 20px 12px;
-    }
-    .value-main-title {
-        font-size: 22px;
-        top: 0;
-        margin-bottom: 6px;
-    }
-    .value-main-desc {
-        font-size: 12px;
-        top: 0;
-        word-break: keep-all;
-    }
-    .left-bottom {
-        flex: 1;
-    }
-    .value-right {
-        width: 100%;
-        flex: 0 0 60%;
-    }
-    .value-item {
-        padding: 0 18px;
-    }
-    .card-title {
-        font-size: 15px;
-    }
-    .card-desc {
-        font-size: 12px;
-        line-height: 1.6;
-        word-break: keep-all;
-    }
-    .value-item.active .card-content {
-        max-height: 160px;
-        margin-top: 10px;
-    }
-
-    /* partners */
-    .partners-section {
-        padding: 80px 24px;
-    }
-    .partners-tabs {
-        gap: 36px;
-        margin-bottom: 36px;
-    }
-    .logo-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-    .logo-item {
-        height: 60px;
-    }
-    .logo-item img {
-        max-width: 70px;
-    }
-
-    /* contact */
-    .contact-area {
-        padding: 60px 20px;
-    }
-    .contact-item {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 28px 0;
-        gap: 10px;
-    }
-    .contact-item:hover {
-        padding-left: 0;
-    }
-    .contact-info {
-        flex-direction: column;
-        gap: 4px;
-        align-items: flex-start;
-    }
-    .contact-cat {
-        transform: none;
-        width: auto;
-        font-size: 12px;
-    }
-    .contact-mail {
-        font-size: clamp(18px, 5.5vw, 26px);
-        word-break: break-all;
-    }
-    .contact-arrow {
-        opacity: 1;
-        font-size: 1.8rem;
-    }
-
-    /* footer */
-    .main-footer {
-        min-height: auto;
-        padding: 32px 20px 44px;
-        gap: 50px;
-    }
-    .footer-top-links {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        font-size: 13px;
-    }
-    .footer-bottom-content {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 36px;
-    }
-    .company-info {
-        gap: 20px;
-    }
-    .info-row {
-        flex-direction: column;
-        gap: 16px;
-    }
-    .info-item .label,
-    .info-item .value {
-        font-size: 13px;
-    }
-    .footer-logo-box {
-        width: 100%;
-        text-align: left;
-    }
-    .footer-logo-box img {
-        margin-left: 0;
-        max-width: 100%;
-    }
-}
-
-/* ==========================================
-   SMALL MOBILE (~ 390px)
-   아이폰SE, 갤럭시 A 소형 기기
-========================================== */
-@media (max-width: 390px) {
-    .hero-title .main-text {
-        font-size: 24px;
-    }
-    .hero-title .sub-text {
-        font-size: 12px;
-    }
-    .whatwedo-desc {
-        font-size: 14px;
-    }
-    .logo-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-    }
-    .contact-mail {
-        font-size: 16px;
-    }
+    .value-sticky-wrapper { flex-direction: column; }
+    .value-left, .value-right { width: 100%; height: 50vh; }
+    .logo-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+    .footer-bottom-content { flex-direction: column; align-items: flex-start; gap: 40px; }
+    .footer-logo-box { width: 100%; text-align: left; }
+    .footer-logo-box img { margin-left: 0; }
 }

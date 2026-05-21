@@ -1,4 +1,3 @@
-// 전역 상태 관리 (애니메이션 부드러움을 위해)
 let targetProgress = 0;
 let currentProgress = 0;
 
@@ -8,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.main-header');
 
     window.addEventListener('scroll', () => {
-        // 상단바 배경 전환
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
@@ -27,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 애니메이션 루프 (RequestAnimationFrame) ---
+    // --- 애니메이션 루프 (히어로 이미지 프레임 높이 확장) ---
     function animate() {
         currentProgress += (targetProgress - currentProgress) * 0.1;
 
@@ -38,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (frame) {
             const height = 30 + (currentProgress * 70);
             frame.style.height = `${height}vh`;
-
+            
             if (img) {
                 img.style.transform = `scale(${1.2 - (currentProgress * 0.2)})`;
             }
@@ -55,58 +53,59 @@ document.addEventListener('DOMContentLoaded', () => {
     animate();
 });
 
-console.log("Farniente: JS Engine Started");
-
-// 비전 마퀴
-const visionText = document.querySelector('.vision-text');
-let scrollPos = 0;
-
-function marqueeAnimate() {
-    scrollPos -= 1;
-
-    if (visionText) {
-        const firstSpan = visionText.querySelector('span');
-        const firstSpanWidth = firstSpan.offsetWidth;
-
-        if (Math.abs(scrollPos) >= firstSpanWidth) {
-            scrollPos = 0;
-        }
-
-        visionText.style.transform = `translateX(${scrollPos}px)`;
-    }
-
-    requestAnimationFrame(marqueeAnimate);
-}
-
-marqueeAnimate();
-
-// value 섹션
+// ✅ VALUE 섹션 강제 고정 및 정밀 전환 로직
 window.addEventListener('scroll', () => {
-    const section = document.querySelector('.value-section');
-    const items = document.querySelectorAll('.value-item');
-    const leftImages = document.querySelectorAll('.value-img');
+    const valueSection = document.querySelector('.value-section');
+    const valueItems = document.querySelectorAll('.value-item');
+    const valueImages = document.querySelectorAll('.value-img');
 
-    if (!section || items.length === 0) return;
+    if (!valueSection || valueItems.length === 0) return;
 
-    const rect = section.getBoundingClientRect();
-    const sectionHeight = section.offsetHeight;
-    const vh = window.innerHeight;
+    // 밸류 섹션의 위치 정보
+    const sectionTop = valueSection.offsetTop;
+    const sectionHeight = valueSection.offsetHeight;
+    const windowHeight = window.innerHeight;
+    const scrollY = window.scrollY;
 
-    const scrolled = -rect.top;
+    // 섹션이 화면에 들어왔는지 확인
+    const isInView = scrollY + windowHeight > sectionTop && scrollY < sectionTop + sectionHeight;
 
-    if (scrolled >= 0 && scrolled <= sectionHeight - vh) {
-        const index = Math.floor(scrolled / ((sectionHeight - vh) / 3));
-        const safeIndex = Math.min(items.length - 1, Math.max(0, index));
+    if (isInView) {
+        // 섹션 내에서의 스크롤 진행도 계산
+        const relativeScroll = scrollY - sectionTop;
+        const maxScroll = sectionHeight - windowHeight;
+        const progress = Math.max(0, Math.min(1, relativeScroll / maxScroll));
 
-        items.forEach((item, i) => {
-            item.classList.toggle('active', i === safeIndex);
+        // 3개 아이템이므로 인덱스 계산
+        let activeIndex = Math.floor(progress * valueItems.length);
+        activeIndex = Math.min(valueItems.length - 1, Math.max(0, activeIndex));
+
+        // 모든 아이템과 이미지에서 active 제거
+        valueItems.forEach((item, i) => {
+            item.classList.remove('active');
+        });
+        valueImages.forEach((img, i) => {
+            img.classList.remove('active');
         });
 
-        leftImages.forEach((img, i) => {
-            img.classList.toggle('active', i === safeIndex);
-        });
+        // 현재 인덱스에만 active 추가
+        if (valueItems[activeIndex]) {
+            valueItems[activeIndex].classList.add('active');
+        }
+        if (valueImages[activeIndex]) {
+            valueImages[activeIndex].classList.add('active');
+        }
+    } else if (scrollY < sectionTop) {
+        // 섹션 이전: 첫 번째 활성화
+        valueItems.forEach((item, i) => item.classList.toggle('active', i === 0));
+        valueImages.forEach((img, i) => img.classList.toggle('active', i === 0));
+    } else {
+        // 섹션 이후: 마지막 활성화
+        const lastIndex = valueItems.length - 1;
+        valueItems.forEach((item, i) => item.classList.toggle('active', i === lastIndex));
+        valueImages.forEach((img, i) => img.classList.toggle('active', i === lastIndex));
     }
-});
+}, { passive: true });
 
 // 파트너십 탭 메뉴
 const tabBtns = document.querySelectorAll('.tab-btn');
@@ -120,7 +119,8 @@ tabBtns.forEach(btn => {
         logoGrids.forEach(g => g.classList.remove('active'));
 
         btn.classList.add('active');
-        document.getElementById(targetTab).classList.add('active');
+        const targetGrid = document.getElementById(targetTab);
+        if (targetGrid) targetGrid.classList.add('active');
     });
 });
 
@@ -133,7 +133,7 @@ window.addEventListener('scroll', () => {
         const winH = window.innerHeight;
         if (cRect.top < winH && cRect.bottom > 0) {
             let p = (winH - cRect.top) / (winH + cRect.height);
-            divider.style.height = `${Math.min(100, p * 150)}%`;
+            divider.style.width = `${Math.min(100, p * 150)}%`;
         }
     }
 });
