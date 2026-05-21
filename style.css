@@ -5,71 +5,72 @@
 }
 
 :root {
-    --header-height: 80px; /* 디자이너님의 상단바 실제 높이에 맞춰 조절하세요 */
+    --header-height: 80px;
 }
 
 /* 기본 설정 */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body, html {
     margin: 0;
     padding: 0;
     width: 100%;
     height: auto;
     background-color: #fff;
+    overflow-x: hidden;
 }
 
-/* 상단바 전체 설정 */
+/* ==========================================
+   HEADER
+========================================== */
 .main-header {
-    position: fixed;   /* 상단 고정 */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 9999;
-    background-color: transparent; /* 초기 상태 투명 */
+    background-color: transparent;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
 }
 
-/* 상단바 내부 정렬 */
 .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 30px; /* 좌우 30px 여백 유지 */
+    padding: 20px 30px;
     box-sizing: border-box;
 }
 
-/* 로고 배치 */
 .logo-area {
     display: flex;
     align-items: center;
 }
 
 .logo-img {
-    height: 25px; /* 로고 높이는 이미지에 맞춰 조절하세요 */
+    height: 25px;
     display: block;
 }
 
-/* 하단 가로선 */
 .header-bottom-line {
     width: 100%;
     height: 1px;
-    background-color: rgba(0, 0, 0, 0.05); /* 아주 연한 선 */
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
-/* 은은한 그림자 효과 */
-.main-header {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); /* 티 안나는 자연스러운 그림자 */
-}
-
-/* 스크롤 시 변화 (필요할 경우를 대비해 클래스만 생성) */
 .main-header.scrolled {
-    background-color: rgba(255, 255, 255, 0.95); /* 스크롤 시 약간 불투명하게 변하고 싶을 때 사용 */
-    backdrop-filter: blur(5px); /* 뒤 배경 살짝 흐리게 */
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
 }
 
-/* 히어로 섹션 전체 높이 (스크롤 여유를 줌) */
+/* ==========================================
+   히어로 섹션 (원본 그대로)
+========================================== */
 .hero-section {
-    height: 250vh; 
+    height: 250vh;
     position: relative;
-    background-color: #ffffff; /* 참고 이미지와 유사한 따뜻한 베이지톤 */
+    background-color: #ffffff;
 }
 
 .hero-sticky-wrapper {
@@ -79,15 +80,13 @@ body, html {
     width: 100%;
     display: flex;
     flex-direction: column;
-    /* 내부 요소들이 위에서부터 차곡차곡 쌓이게 합니다 */
-    justify-content: flex-start; 
-    padding: 0; /* 여백 때문에 비어 보일 수 있으니 일단 0으로 */
+    justify-content: flex-start;
+    padding: 0;
     overflow: hidden;
 }
 
-/* 문장 영역: 40% 너비, 상단바 아래 위치 */
 .hero-text-area {
-    position: absolute; /* 텍스트를 이미지 위에 띄웁니다 */
+    position: absolute;
     top: 430px;
     left: 30px;
     width: 100%;
@@ -96,15 +95,10 @@ body, html {
 
 .hero-title .main-text {
     font-family: 'PP Neue Montreal', sans-serif;
-    font-size: 72px; /* 세리프는 조금 커야 맛이 납니다 */
+    font-size: 72px;
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: #1a1a1a;
-   /* text-transform: uppercase;*/
-
-}
-
-.hero-title .main-text {
     display: block;
     font-weight: 600;
 }
@@ -120,40 +114,41 @@ body, html {
     color: #555;
 }
 
-/* 이미지 컨테이너: 처음에는 아래쪽 50% 차지 */
 .hero-image-container {
     width: 100%;
-    height: 100vh; /* 컨테이너는 미리 100% 확보 */
+    height: 100vh;
     display: flex;
-    align-items: flex-end; /* 이미지를 바닥에 붙여서 시작 */
+    align-items: flex-end;
     filter: grayscale(100%);
 }
 
 .hero-image-frame {
     width: 100%;
-    height: 30vh; /* 시작 높이 */
+    height: 30vh;
     overflow: hidden;
     position: relative;
-    /* 중요: 이미지가 커질 때 위로 차오르게 하기 위해 하단 고정 */
     margin-top: auto;
-    transition: none; 
+    transition: none;
 }
 
 .hero-image-frame img {
     width: 100%;
-    height: 100vh; /* [핵심] 이미지는 미리 100vh 높이를 가져야 프레임이 커질 때 상단이 안 빕니다 */
+    height: 100vh;
     object-fit: cover;
     object-position: center;
-    transition: none; 
+    transition: none;
 }
 
+/* ==========================================
+   비전 마퀴
+========================================== */
 .vision-bridge-section {
     width: 100%;
     height: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff; /* 히어로 섹션과 톤을 맞춰주세요 */
+    background-color: #ffffff;
     overflow: hidden;
 }
 
@@ -162,7 +157,7 @@ body, html {
 }
 
 .vision-text {
-    display: flex; /* 내부 span들을 가로로 나열 */
+    display: flex;
     white-space: nowrap;
     font-family: 'PP Neue Montreal', sans-serif;
     font-weight: 600;
@@ -171,36 +166,41 @@ body, html {
 }
 
 .vision-text span {
-    padding-right: 20px; /* 문장과 문장 사이의 간격 */
+    padding-right: 20px;
 }
 
-.whatwedo-section{
-    padding:500px 20px;
+/* ==========================================
+   What We Do
+========================================== */
+.whatwedo-section {
+    padding: 500px 20px;
 }
 
-.whatwedo-inner{
+.whatwedo-inner {
     width: 100%;
-    margin:0 auto;
-    text-align:center;
+    margin: 0 auto;
+    text-align: center;
 }
 
-.whatwedo-title{
-    font-size:22px;
+.whatwedo-title {
+    font-size: 22px;
     font-weight: 500;
     margin-bottom: 28px;
 }
 
-.whatwedo-desc{
-    font-size:27px;
-    line-height:1.7;
+.whatwedo-desc {
+    font-size: 27px;
+    line-height: 1.7;
     font-weight: 400;
 }
 
-/* 섹션 전체 높이 확보 (스크롤 할 수 있는 공간) */
+/* ==========================================
+   Value 섹션 (원본 그대로)
+========================================== */
 .value-section {
     position: relative;
     width: 100%;
-    height: 400vh; /* 스크롤 길이는 넉넉히 */
+    height: 400vh;
     background-color: #000;
 }
 
@@ -210,8 +210,8 @@ body, html {
     left: 0;
     width: 100%;
     height: 100vh;
-    display: flex; /* 좌우 나란히 배치 */
-    flex-direction: row; 
+    display: flex;
+    flex-direction: row;
     overflow: hidden;
 }
 
@@ -219,8 +219,8 @@ body, html {
     width: 50%;
     height: 100%;
     display: flex;
-    flex-direction: column; /* 상하 배치를 위해 column 설정 */
-    padding: 0; /* 내부 영역에서 패딩을 조절하기 위해 0으로 변경 */
+    flex-direction: column;
+    padding: 0;
     background-color: #000;
     color: #fff;
 }
@@ -228,21 +228,21 @@ body, html {
 .value-left-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 이미지가 영역에 맞게 꽉 차도록 설정 */
+    object-fit: cover;
     display: block;
 }
 
 .left-top {
-    flex: 1; /* 상하 비율 조절 (예: 1:1) */
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 30px; /* 기존 좌측 패딩 유지 */
+    padding: 30px;
     background-color: #000;
 }
 
 .left-bottom {
-    flex: 1; /* 상하 비율 조절 */
+    flex: 1;
     width: 100%;
     height: 100%;
     position: relative;
@@ -256,24 +256,24 @@ body, html {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0; /* 기본적으로 안 보임 */
-    transition: opacity 0.6s ease; /* 이미지가 바뀔 때 부드럽게 페이드 */
+    opacity: 0;
+    transition: opacity 0.6s ease;
     filter: grayscale(100%);
 }
 
 .value-img.active {
-    opacity: 1; /* 활성화된 이미지만 보임 */
+    opacity: 1;
 }
 
-.value-main-title{
-font-size: 40px;
-font-weight: 400;
-margin-bottom: 10px;
-position: relative;
-top: 45px;
+.value-main-title {
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    position: relative;
+    top: 45px;
 }
 
-.value-main-desc{
+.value-main-desc {
     font-size: 18px;
     line-height: 1.6;
     font-weight: 400;
@@ -285,7 +285,7 @@ top: 45px;
     width: 50%;
     height: 100%;
     display: flex;
-    flex-direction: column; /* 3단 쌓기 */
+    flex-direction: column;
 }
 
 .value-item {
@@ -298,23 +298,26 @@ top: 45px;
 }
 
 .value-item.active {
-    flex: 4; /* 활성화 시 확 커짐 */
+    flex: 4;
 }
 
-/* 숫자와 타이틀 가로 배치 */
 .card-header {
     display: flex;
     align-items: baseline;
     gap: 15px;
 }
 
-.card-title { font-size: 28px; font-weight: 500; font-family: 'PP Neue Montreal'; }
+.card-title {
+    font-size: 28px;
+    font-weight: 500;
+    font-family: 'PP Neue Montreal';
+}
 
 .card-desc {
-font-size: 18px;
-line-height: 1.6;
-font-weight: 300;
-margin-top: 10px;
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 300;
+    margin-top: 10px;
 }
 
 .card-content {
@@ -330,17 +333,18 @@ margin-top: 10px;
     margin-top: 20px;
 }
 
-.item-01 { background-color: #f3F3F3; }
+.item-01 { background-color: #f3f3f3; }
 .item-02 { background-color: #ebebeb; }
 .item-03 { background-color: #dddddd; }
 
-/*파트너십 섹션*/
+/* ==========================================
+   Partners 섹션
+========================================== */
 .partners-section {
     padding: 300px 0;
     text-align: center;
 }
 
-/* 탭 메뉴 스타일 */
 .partners-tabs {
     margin-bottom: 60px;
     display: flex;
@@ -365,16 +369,15 @@ margin-top: 10px;
     font-weight: 600;
 }
 
-/* 로고 그리드 (1줄에 5개) */
 .logo-grid {
-    display: none; /* 기본 숨김 */
+    display: none;
     grid-template-columns: repeat(5, 1fr);
     gap: 80px;
     align-items: center;
 }
 
 .logo-grid.active {
-    display: grid; /* 활성화 시 노출 */
+    display: grid;
 }
 
 .logo-item {
@@ -387,23 +390,28 @@ margin-top: 10px;
 .logo-item img {
     max-width: 120px;
     height: auto;
-    /* 흑백 필터 적용 */
     filter: grayscale(100%);
     opacity: 0.6;
     transition: all 0.4s ease;
 }
 
-/* 마우스 올리면 컬러로 변경 */
 .logo-item img:hover {
     filter: grayscale(0%);
     opacity: 1;
 }
 
-
-/* 문의섹션 전체 컨테이너 */
+/* ==========================================
+   Contact 섹션
+========================================== */
 .contact-area {
     padding: 120px 30px;
     background-color: var(--bg-color);
+}
+
+.contact-line {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0,0,0,0.1);
 }
 
 .contact-wrapper {
@@ -425,12 +433,10 @@ margin-top: 10px;
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-/* 호버 시 텍스트만 살짝 오른쪽으로 밀리게 */
 .contact-item:hover {
     padding-left: 40px;
 }
 
-/* 호버 시 배경색이 아래서 위로 차오르는 효과를 원하시면 추가 */
 .contact-item::before {
     content: '';
     position: absolute;
@@ -439,13 +445,13 @@ margin-top: 10px;
     z-index: -1;
     transition: height 0.4s ease;
 }
+
 .contact-item:hover::before { height: 100%; }
 .contact-item:hover { color: #fff; }
 
-
 .contact-info {
     display: flex;
-    align-items: baseline; /* 라벨과 이메일 한 줄 배치 */
+    align-items: baseline;
     gap: 120px;
     flex-grow: 1;
 }
@@ -454,14 +460,15 @@ margin-top: 10px;
     font-family: 'Instrument Sans', sans-serif;
     font-size: 15px;
     font-weight: 500;
-    display: inline-block; /* 너비를 먹이기 위해 설정 */
+    display: inline-block;
     width: 100px;
     transform: translateY(-20px);
+    flex-shrink: 0;
 }
 
 .contact-mail {
     font-family: 'Instrument Sans', sans-serif;
-    font-size: 4vw; /* 시원한 크기 */
+    font-size: 4vw;
     font-weight: 700;
     margin: 0;
 }
@@ -471,32 +478,34 @@ margin-top: 10px;
     font-weight: 200;
     opacity: 0;
     transition: opacity 0.3s, transform 0.3s;
+    flex-shrink: 0;
 }
+
 .contact-item:hover .contact-arrow {
     opacity: 1;
     transform: translate(10px, -10px);
 }
 
-
-/*푸터푸터푸터*/
+/* ==========================================
+   Footer
+========================================== */
 .main-footer {
-    background-color: #111; /* 시안의 짙은 그레이/블랙 톤 */
+    background-color: #111;
     color: #fff;
-    padding: 40px 60px 60px; /* 시안처럼 하단 여백을 많이 줌 */
+    padding: 40px 60px 60px;
     position: relative;
     z-index: 9999;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 850px; /* 공간 확보 */
+    min-height: 850px;
     box-sizing: border-box;
 }
 
-/* 1. 우측 상단 영역 */
 .footer-top-links {
     display: flex;
-    justify-content: flex-end; /* 오른쪽 정렬 */
+    justify-content: flex-end;
     gap: 40px;
     font-size: 15px;
     color: #888;
@@ -512,14 +521,12 @@ margin-top: 10px;
     text-decoration: none;
 }
 
-/* 2. 하단 메인 영역 */
 .footer-bottom-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; /* 바닥에 딱 붙임 */
+    align-items: flex-end;
 }
 
-/* 왼쪽 정보 텍스트 */
 .company-info {
     display: flex;
     flex-direction: column;
@@ -548,83 +555,299 @@ margin-top: 10px;
     font-weight: 500;
 }
 
-/* 로고 이미지 (우하단 쏠림) */
 .footer-logo-box {
-    width: 65%; /* 로고가 차지하는 비중 */
+    width: 65%;
     text-align: right;
 }
 
 .footer-logo-box img {
     width: 100%;
-    max-width: 900px; /* 로고 크기는 프로젝트에 맞춰 조절 */
+    max-width: 900px;
     display: block;
     margin-left: auto;
 }
 
+/* ==========================================
+   LAPTOP (1024px ~ 1440px)
+========================================== */
+@media (max-width: 1440px) {
+    .hero-title .main-text {
+        font-size: clamp(52px, 5.5vw, 72px);
+    }
+    .hero-title .sub-text {
+        font-size: clamp(16px, 1.6vw, 22px);
+    }
+    .contact-mail {
+        font-size: clamp(30px, 3.8vw, 56px);
+    }
+}
+
+/* ==========================================
+   TABLET (768px ~ 1024px)
+========================================== */
+@media (max-width: 1024px) {
+    .hero-text-area {
+        top: 260px;
+        left: 24px;
+        width: calc(100% - 48px);
+    }
+    .hero-title .main-text {
+        font-size: clamp(40px, 5.5vw, 60px);
+    }
+    .hero-title .sub-text {
+        font-size: clamp(14px, 2vw, 18px);
+        margin-top: 14px;
+    }
+    .whatwedo-section {
+        padding: 300px 40px;
+    }
+    .whatwedo-desc {
+        font-size: 22px;
+    }
+    .value-main-title {
+        font-size: 30px;
+    }
+    .value-main-desc {
+        font-size: 15px;
+    }
+    .value-item {
+        padding: 0 30px;
+    }
+    .card-title {
+        font-size: 22px;
+    }
+    .card-desc {
+        font-size: 15px;
+    }
+    .partners-section {
+        padding: 200px 40px;
+    }
+    .logo-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 50px;
+    }
+    .contact-info {
+        gap: 60px;
+    }
+    .contact-mail {
+        font-size: clamp(22px, 3.5vw, 40px);
+    }
+    .main-footer {
+        padding: 40px 40px 50px;
+        min-height: 600px;
+    }
+    .footer-logo-box {
+        width: 55%;
+    }
+}
+
+/* ==========================================
+   MOBILE (~ 768px)
+   ★ 히어로 sticky/height → 절대 건드리지 않음 (JS 동작 보장)
+   ★ value sticky/height(400vh) → 절대 건드리지 않음 (JS 동작 보장)
+   ★ 레이아웃·폰트·간격만 조정
+========================================== */
 @media (max-width: 768px) {
 
-  /* 히어로 텍스트 */
-  .hero-text-area {
-    top: 120px;
-    left: 20px;
-  }
+    /* 헤더 */
+    .header-inner {
+        padding: 16px 20px;
+    }
+    .logo-img {
+        height: 20px;
+    }
 
-  .hero-title .main-text {
-    font-size: 32px;
-  }
+    /* 히어로 텍스트 위치·크기만 조정 */
+    .hero-text-area {
+        top: 120px;
+        left: 20px;
+        width: calc(100% - 40px);
+    }
+    .hero-title .main-text {
+        font-size: clamp(26px, 7.5vw, 40px);
+        line-height: 1.1;
+    }
+    .hero-title .sub-text {
+        font-size: clamp(12px, 3.5vw, 15px);
+        margin-top: 10px;
+    }
 
-  .hero-title .sub-text {
-    font-size: 16px;
-  }
+    /* 비전 마퀴 */
+    .vision-bridge-section {
+        height: auto;
+        min-height: 50px;
+        padding: 14px 0;
+    }
+    .vision-text {
+        font-size: clamp(13px, 4.5vw, 18px);
+    }
 
-  /* 히어로 이미지 높이 */
-  .hero-image-frame {
-    height: 40vh;
-  }
+    /* what we do */
+    .whatwedo-section {
+        padding: 80px 24px;
+    }
+    .whatwedo-title {
+        font-size: 15px;
+        margin-bottom: 18px;
+    }
+    .whatwedo-desc {
+        font-size: clamp(15px, 4vw, 19px);
+        line-height: 1.8;
+        word-break: keep-all;
+    }
 
-  /* what we do */
-  .whatwedo-desc {
-    font-size: 18px;
-  }
+    /* value — sticky/height 유지, 방향만 column으로 */
+    .value-sticky-wrapper {
+        flex-direction: column;
+    }
+    .value-left {
+        width: 100%;
+        flex: 0 0 40%;
+    }
+    .left-top {
+        padding: 52px 20px 12px;
+    }
+    .value-main-title {
+        font-size: 22px;
+        top: 0;
+        margin-bottom: 6px;
+    }
+    .value-main-desc {
+        font-size: 12px;
+        top: 0;
+        word-break: keep-all;
+    }
+    .left-bottom {
+        flex: 1;
+    }
+    .value-right {
+        width: 100%;
+        flex: 0 0 60%;
+    }
+    .value-item {
+        padding: 0 18px;
+    }
+    .card-title {
+        font-size: 15px;
+    }
+    .card-desc {
+        font-size: 12px;
+        line-height: 1.6;
+        word-break: keep-all;
+    }
+    .value-item.active .card-content {
+        max-height: 160px;
+        margin-top: 10px;
+    }
 
-  /* value 섹션 세로로 변경 */
-  .value-sticky-wrapper {
-    flex-direction: column;
-  }
+    /* partners */
+    .partners-section {
+        padding: 80px 24px;
+    }
+    .partners-tabs {
+        gap: 36px;
+        margin-bottom: 36px;
+    }
+    .logo-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .logo-item {
+        height: 60px;
+    }
+    .logo-item img {
+        max-width: 70px;
+    }
 
-  .value-left,
-  .value-right {
-    width: 100%;
-  }
+    /* contact */
+    .contact-area {
+        padding: 60px 20px;
+    }
+    .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px 0;
+        gap: 10px;
+    }
+    .contact-item:hover {
+        padding-left: 0;
+    }
+    .contact-info {
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-start;
+    }
+    .contact-cat {
+        transform: none;
+        width: auto;
+        font-size: 12px;
+    }
+    .contact-mail {
+        font-size: clamp(18px, 5.5vw, 26px);
+        word-break: break-all;
+    }
+    .contact-arrow {
+        opacity: 1;
+        font-size: 1.8rem;
+    }
 
-  .value-item {
-    padding: 30px 20px;
-  }
+    /* footer */
+    .main-footer {
+        min-height: auto;
+        padding: 32px 20px 44px;
+        gap: 50px;
+    }
+    .footer-top-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 13px;
+    }
+    .footer-bottom-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 36px;
+    }
+    .company-info {
+        gap: 20px;
+    }
+    .info-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .info-item .label,
+    .info-item .value {
+        font-size: 13px;
+    }
+    .footer-logo-box {
+        width: 100%;
+        text-align: left;
+    }
+    .footer-logo-box img {
+        margin-left: 0;
+        max-width: 100%;
+    }
+}
 
-  /* 파트너 로고 */
-  .logo-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-  }
-
-  /* contact */
-  .contact-info {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .contact-mail {
-    font-size: 24px;
-  }
-
-  /* footer */
-  .footer-bottom-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 40px;
-  }
-
-  .footer-logo-box {
-    width: 100%;
-  }
+/* ==========================================
+   SMALL MOBILE (~ 390px)
+   아이폰SE, 갤럭시 A 소형 기기
+========================================== */
+@media (max-width: 390px) {
+    .hero-title .main-text {
+        font-size: 24px;
+    }
+    .hero-title .sub-text {
+        font-size: 12px;
+    }
+    .whatwedo-desc {
+        font-size: 14px;
+    }
+    .logo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+    .contact-mail {
+        font-size: 16px;
+    }
 }
