@@ -1,553 +1,567 @@
-@font-face {
-    font-family: 'PP Neue Montreal';
-    src: url('./fonts/PP_Neue_Montreal_Bold.woff2') format('woff2');
-    font-style: normal;
-}
-
 :root {
-    --header-height: 80px;
+  --site-margin: clamp(24px, 7.5vw, 140px);
+  --nav-height: 80px;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
+@font-face {
+  font-family: 'TimeBurner';
+  src: url('fonts/TimeBurner-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-/* ✅ overflow-x: hidden 제거 - Sticky 작동 가능하게 */
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: auto;
-    background-color: #fff;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ==========================================
-   HEADER
-========================================== */
-.main-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 9999;
-    background-color: transparent;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+body {
+  font-family: 'Pretendard', sans-serif;
+  background-color: #ffffff;
+  color: #212121;
 }
 
-.header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 30px;
-    box-sizing: border-box;
+/* ---------- 상단 네비게이션바 ---------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--site-margin);
+  background-color: #ffffff;
+  z-index: 1000;
 }
 
-.logo-area {
-    display: flex;
-    align-items: center;
+.navbar .logo img {
+  height: 28px;
+  display: block;
+  margin-left: 10px;
+  filter: grayscale(100%); /* dial: 로고 흑백 처리 */
 }
 
-.logo-img {
-    height: 25px;
-    display: block;
+/* ---------- 히어로 섹션 ---------- */
+.hero {
+  position: relative;
+  margin: 0 var(--site-margin);
+  height: 100vh;
+  overflow: hidden;
 }
 
-.header-bottom-line {
-    width: 100%;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.05);
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('images/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%); /* dial: 히어로 이미지 흑백 처리 */
 }
 
-.main-header.scrolled {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(5px);
+.hero-caption {
+  position: absolute;
+  bottom: 4%;
+  left: 2%;
+  right: 2%;
+  width: 96%;
+  font-family: 'TimeBurner', 'Pretendard', sans-serif;
+  font-weight: 700;
+  font-size: clamp(50px, 22vw, 170px);
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 0.95;
 }
 
-/* ==========================================
-   HERO SECTION
-========================================== */
-.hero-section {
-    height: 140vh;
-    position: relative;
-    background-color: #ffffff;
+/* ---------- Science 섹션 ---------- */
+.science-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 var(--site-margin);
+  border-top: 3px solid #111;
+  border-bottom: 1px solid #ddd;
 }
 
-.hero-sticky-wrapper {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
+.science-media {
+  border-right: 1px solid #ddd;
+  background-image: url('images/image2.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 320px;
+  filter: grayscale(100%); /* dial: science 이미지 흑백 처리 */
 }
 
-.hero-text-area {
-    position: absolute;
-    top: 430px;
-    left: 30px;
-    width: calc(100% - 60px);
-    z-index: 10;
+.science-content {
+  padding: 90px 50px;
 }
 
-.hero-title .main-text {
-    font-family: 'PP Neue Montreal', sans-serif;
-    font-size: 72px;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: #1a1a1a;
-    display: block;
-    font-weight: 600;
+.science-heading {
+  font-family: 'TimeBurner', 'Pretendard', serif;
+  font-weight: 600;
+  font-size: clamp(22px, 2.2vw, 32px);
+  margin-bottom: 16px;
+  color: #212121;
 }
 
-.hero-title .sub-text {
-    font-family: 'Inter', sans-serif;
-    display: block;
-    font-size: 22px;
-    font-weight: 300;
-    line-height: 1.5;
-    letter-spacing: -0.03em;
-    margin-top: 20px;
-    color: #555;
+.science-text {
+  font-family: 'Pretendard', sans-serif;
+  font-size: clamp(14px, 1.2vw, 18px);
+  line-height: 1.5;
+  color: #333333;
 }
 
-.hero-image-container {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    filter: grayscale(100%);
-}
-
-.hero-image-frame {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 30vh;
-    overflow: hidden;
-}
-
-.hero-image-frame img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-}
-
-/* ==========================================
-   WHAT WE DO
-========================================== */
-.whatwedo-section {
-    padding: 400px 20px;
-}
-
-.whatwedo-inner {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.whatwedo-title {
-    font-size: 22px;
-    font-weight: 500;
-    margin-bottom: 28px;
-}
-
-.whatwedo-desc {
-    font-size: 27px;
-    line-height: 1.7;
-    font-weight: 400;
-}
-
-/* ==========================================
-   VALUE SECTION - ✅ 고정 + 디자인 복구
-========================================== */
+/* ---------- Value 섹션 ---------- */
 .value-section {
-    position: relative;
-    width: 100%;
-    height: 300vh;
-    background-color: #000;
+  position: relative;
+  height: 300vh;
 }
 
-/* ✅ Sticky 강제 고정 */
-.value-sticky-wrapper {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    overflow: visible;
-    z-index: 50;
-}
-
-.value-left {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    background-color: #000;
-    color: #fff;
-}
-
-.left-top {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 30px;
-    background-color: #000;
-}
-
-.left-bottom {
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.value-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    filter: grayscale(100%);
-}
-
-.value-img.active {
-    opacity: 1;
-}
-
-.value-main-title {
-    font-size: 40px;
-    font-weight: 400;
-    margin-bottom: 10px;
-    position: relative;
-    top: 45px;
-}
-
-.value-main-desc {
-    font-size: 18px;
-    line-height: 1.6;
-    font-weight: 400;
-    position: relative;
-    top: 45px;
-}
-
-.value-right {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow-y: hidden;
+.value-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  margin: 0 var(--site-margin);
+  overflow: hidden;
 }
 
 .value-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 60px;
-    transition: flex 0.7s cubic-bezier(0.2, 1, 0.3, 1);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
 }
 
 .value-item.active {
-    flex: 4;
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.card-header {
-    display: flex;
-    align-items: baseline;
-    gap: 15px;
+.value-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 60px;
+  background-color: #c9c9c9;
+  color: #212121;
 }
 
-.card-title {
-    font-size: 28px;
-    font-weight: 500;
-    font-family: 'PP Neue Montreal';
+.value-text h3 {
+  font-family: 'TimeBurner', 'Pretendard', serif;
+  font-weight: 600;
+  font-size: clamp(22px, 2.2vw, 32px);
+  margin-bottom: 20px;
 }
 
-.card-desc {
-    font-size: 18px;
-    line-height: 1.6;
-    font-weight: 300;
-    margin-top: 10px;
+.value-desc {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  font-size: clamp(14px, 1.2vw, 18px);
+  line-height: 1.7; /* dial: 한글 행간, 기존 1.5에서 확장 */
+  max-width: 700px;
+  color: #212121;
 }
 
-.card-content {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.5s ease;
+.value-image {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%); /* dial: value 이미지 흑백 처리 */
 }
 
-.value-item.active .card-content {
-    opacity: 1;
-    max-height: 200px;
-    margin-top: 20px;
+.value-caption {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
 }
 
-/* ✅ 원래 색상 복구 */
-.item-01 { background-color: #f3f3f3; }
-.item-02 { background-color: #ebebeb; }
-.item-03 { background-color: #dddddd; }
-
-/* ==========================================
-   PARTNERS SECTION
-========================================== */
-.partners-section {
-    padding: 300px 0;
-    text-align: center;
-    background-color: #ffffff;
+/* ---------- Partnership 섹션 ---------- */
+.partnership-section {
+  position: relative;
+  height: 500vh;
 }
 
-.partners-tabs {
-    margin-bottom: 60px;
-    display: flex;
-    justify-content: center;
-    gap: 70px;
+.partnership-sticky {
+  position: sticky;
+  top: var(--nav-height); /* 고정 네비바 높이만큼 내려서 겹침 방지 */
+  height: calc(100vh - var(--nav-height));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; /* 주제목 + 로고트랙을 세로로 쌓아 함께 고정 */
+  margin: 0 var(--site-margin);
 }
 
-.tab-btn {
-    background: none;
-    border: none;
-    font-size: 14px;
-    color: #999;
-    cursor: pointer;
-    padding-bottom: 5px;
-    border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
+.partnership-title-wrap {
+  flex-shrink: 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 50px 0; /* dial: 주제목 상하 여백 */
 }
 
-.tab-btn.active {
-    color: #000;
-    border-bottom: 2px solid #000;
-    font-weight: 600;
+.partnership-title {
+  font-family: 'TimeBurner', 'Pretendard', sans-serif;
+  font-weight: 600;
+  font-size: clamp(28px, 2.6vw, 36px);
+  color: #111111;
+  text-transform: lowercase;
 }
 
-.logo-grid {
-    display: none;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 80px;
-    align-items: center;
-    padding: 0 40px;
+.partnership-track-wrap {
+  flex: 1; /* 주제목 아래 남은 공간을 로고트랙이 차지 */
+  display: flex;
+  align-items: center; /* 로고트랙을 남은 공간의 세로 중앙에 */
+  overflow: hidden;
 }
 
-.logo-grid.active {
-    display: grid;
+.partnership-track {
+  display: flex;
+  align-items: center; /* 컬럼 각각을 세로 중앙 기준으로 정렬 (2개짜리 컬럼도 위아래 여백 균등) */
+  gap: 50px;
+  will-change: transform;
 }
 
-.logo-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
+.logo-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex-shrink: 0;
 }
 
-.logo-item img {
-    max-width: 120px;
-    height: auto;
-    filter: grayscale(100%);
-    opacity: 0.6;
-    transition: all 0.4s ease;
+.logo-box {
+  width: 240px;  /* 기존 160px에서 1.5배 */
+  height: 135px; /* 기존 90px에서 1.5배 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-.logo-item img:hover {
-    filter: grayscale(0%);
-    opacity: 1;
+.logo-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%); /* dial: 파트너십 로고 기본 흑백 */
+  transition: filter 0.3s ease; /* dial: 호버 전환 속도 */
 }
 
-/* ==========================================
-   CONTACT SECTION
-========================================== */
-.contact-area {
-    padding: 120px 30px;
+.logo-box:hover img {
+  filter: grayscale(0%); /* 호버 시 원래 색상 */
 }
 
+/* ---------- 제휴문의 구분선 (장식용 빈 박스) ---------- */
 .contact-divider {
-    width: 0%;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.1);
-    transition: width 0.1s ease-out;
+  position: relative;
+  margin: 0 var(--site-margin);
+  height: 90px; /* dial: 구분선 박스 높이 */
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.contact-wrapper {
-    display: flex;
-    flex-direction: column;
+.contact-divider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 45%; /* dial: 세로 구분선 위치 */
+  border-left: 1px solid #e5e5e5;
 }
 
-.contact-item {
-    display: flex;
-    align-items: center;
-    padding: 60px 0;
-    text-decoration: none;
-    color: #1a1a1a;
-    position: relative;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+/* ---------- 제휴문의 섹션 ---------- */
+.contact-section {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 var(--site-margin);
+  padding: 60px 0 440px; /* dial: 위/아래 여백, 아래쪽은 의도된 큰 여백 (기존 220px의 2배) */
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.contact-item:first-child {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+.contact-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 45%; /* dial: 세로 구분선 위치, 위쪽 구분선과 동일하게 정렬 */
+  border-left: 1px solid #e5e5e5;
 }
 
-.contact-item:hover {
-    padding-left: 40px;
+.contact-text {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.6;
+  color: #212121;
 }
 
-.contact-item::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0;
-    background-color: #000;
-    z-index: -1;
-    transition: height 0.4s ease;
+.contact-email {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  font-size: clamp(15px, 1.2vw, 18px);
+  color: #212121;
+  text-decoration: none;
 }
 
-.contact-item:hover::before {
-    height: 100%;
+.contact-email:hover {
+  text-decoration: underline;
 }
 
-.contact-item:hover {
-    color: #fff;
+/* ---------- 푸터 ---------- */
+.footer {
+  background-color: #212121;
+  color: #ffffff;
+  padding: 60px var(--site-margin) 40px; /* dial: 푸터 상하 여백 */
 }
 
-.contact-info {
-    display: flex;
-    align-items: baseline;
-    gap: 120px;
-    flex-grow: 1;
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* dial: 정보 행 간격 */
+  margin-bottom: 100px; /* dial: 정보 영역과 로고 사이 간격 */
 }
 
-.contact-cat {
-    font-size: 15px;
-    font-weight: 500;
-    display: inline-block;
-    width: 100px;
-    transform: translateY(-20px);
-    flex-shrink: 0;
+.footer-row {
+  display: flex;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 14px;
 }
 
-.contact-mail {
-    font-size: 4vw;
-    font-weight: 700;
-    margin: 0;
+.footer-label {
+  width: 140px; /* dial: 라벨 컬럼 너비 */
+  color: #9a9a9a;
+  text-transform: lowercase;
 }
 
-.contact-arrow {
-    font-size: 3rem;
-    font-weight: 200;
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
-    flex-shrink: 0;
+.footer-value {
+  color: #ffffff;
 }
 
-.contact-item:hover .contact-arrow {
-    opacity: 1;
-    transform: translate(10px, -10px);
+.footer-label-link {
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-/* ==========================================
-   FOOTER
-========================================== */
-.main-footer {
-    background-color: #111;
-    color: #fff;
-    padding: 40px 60px 60px;
-    position: relative;
-    z-index: 9999;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 850px;
-    box-sizing: border-box;
+.footer-label-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 
-.footer-top-links {
-    display: flex;
-    justify-content: flex-end;
-    gap: 40px;
-    font-size: 15px;
-    color: #888;
+.footer-logo img {
+  height: 40px; /* dial: 로고 높이 */
+  display: block;
+  margin-bottom: 60px; /* dial: 로고와 하단 라인 사이 간격 */
+  filter: grayscale(100%); /* dial: 푸터 로고 흑백 처리 */
 }
 
-.policy-links {
-    display: flex;
-    gap: 20px;
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #3a3a3a;
+  padding-top: 24px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 13px;
 }
 
-.policy-links a {
-    color: #888;
-    text-decoration: none;
+.footer-links {
+  display: flex;
+  gap: 24px;
 }
 
-.footer-bottom-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+.footer-links a {
+  color: #ffffff;
+  text-decoration: none;
 }
 
-.company-info {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+.footer-links a:hover {
+  color: #9a9a9a;
 }
 
-.info-row {
-    display: flex;
-    gap: 60px;
+.footer-copyright {
+  color: #9a9a9a;
 }
 
-.info-item {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+/* ==================== 반응형 (Responsive) ==================== */
 
-.info-item .label {
-    font-size: 15px;
-    color: #555;
-    text-transform: lowercase;
-}
-
-.info-item .value {
-    font-size: 15px;
-    font-weight: 500;
-}
-
-.footer-logo-box {
-    width: 65%;
-    text-align: right;
-}
-
-.footer-logo-box img {
-    width: 100%;
-    max-width: 900px;
-    display: block;
-    margin-left: auto;
-}
-
-/* ==========================================
-   RESPONSIVE OVERRIDES
-========================================== */
+/* ---------- 노트북 / 작은 데스크탑, 태블릿 가로 (~1024px 이하) ---------- */
 @media (max-width: 1024px) {
-    .logo-grid { grid-template-columns: repeat(4, 1fr); gap: 50px; }
+  /* Science 섹션: 좌우 분할 -> 위아래로 스택 */
+  .science-section {
+    grid-template-columns: 1fr;
+  }
+  .science-media {
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    min-height: 260px;
+  }
+  .science-content {
+    padding: 40px 24px;
+  }
+
+  /* Value 섹션: 텍스트/이미지 좌우 -> 위아래 */
+  .value-item {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .value-text {
+    padding: 24px 32px;
+  }
+  .value-desc {
+    max-width: 100%;
+  }
+
+  /* Partnership 로고 크기 축소 */
+  .logo-box {
+    width: 180px; /* dial: 태블릿 로고 박스 너비 */
+    height: 100px; /* dial: 태블릿 로고 박스 높이 */
+  }
+  .partnership-track {
+    gap: 32px;
+  }
+  .logo-column {
+    gap: 16px;
+  }
 }
 
+/* ---------- 태블릿 세로 / 큰 모바일 (~768px 이하) ---------- */
 @media (max-width: 768px) {
-    .value-sticky-wrapper { flex-direction: column; }
-    .value-left, .value-right { width: 100%; height: 50vh; }
-    .logo-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
-    .footer-bottom-content { flex-direction: column; align-items: flex-start; gap: 40px; }
-    .footer-logo-box { width: 100%; text-align: left; }
-    .footer-logo-box img { margin-left: 0; }
+  :root {
+    --nav-height: 64px; /* dial: 모바일 네비바 높이 */
+  }
+
+  .navbar .logo img {
+    height: 22px;
+  }
+
+  .hero-caption {
+    bottom: 6%;
+    line-height: 1;
+  }
+
+  .science-content {
+    padding: 32px 20px;
+  }
+  .science-heading {
+    margin-bottom: 12px;
+  }
+
+  .value-text {
+    padding: 20px 24px;
+  }
+  .value-text h3 {
+    margin-bottom: 10px;
+  }
+  .value-caption {
+    left: 16px;
+    bottom: 16px;
+    font-size: 12px;
+  }
+
+  .partnership-title-wrap {
+    padding: 32px 0; /* dial: 모바일 주제목 상하 여백 */
+  }
+  .logo-box {
+    width: 140px; /* dial: 모바일 로고 박스 너비 */
+    height: 80px; /* dial: 모바일 로고 박스 높이 */
+  }
+  .partnership-track {
+    gap: 24px;
+  }
+  .logo-column {
+    gap: 12px;
+  }
+
+  /* 제휴문의: 좌우 배치 -> 위아래 스택, 세로 구분선 숨김 */
+  .contact-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 40px 0 160px; /* dial: 모바일 아래 여백 */
+  }
+  .contact-section::after {
+    display: none;
+  }
+  .contact-divider::after {
+    display: none;
+  }
+
+  /* 푸터 */
+  .footer {
+    padding: 48px var(--site-margin) 32px;
+  }
+  .footer-info {
+    margin-bottom: 60px; /* dial: 모바일 정보영역-로고 간격 */
+  }
+  .footer-logo img {
+    height: 32px;
+    margin-bottom: 40px;
+  }
+}
+
+/* ---------- 모바일 (~480px 이하) ---------- */
+@media (max-width: 480px) {
+  .hero-caption {
+    bottom: 5%;
+  }
+
+  .science-media {
+    min-height: 200px;
+  }
+
+  .value-caption {
+    display: none; /* 좁은 화면에서 이미지 위 캡션 텍스트 생략 */
+  }
+
+  .partnership-title-wrap {
+    padding: 24px 0;
+  }
+  .logo-box {
+    width: 110px; /* dial: 초소형 화면 로고 박스 너비 */
+    height: 64px; /* dial: 초소형 화면 로고 박스 높이 */
+  }
+  .partnership-track {
+    gap: 16px;
+  }
+  .logo-column {
+    gap: 8px;
+  }
+
+  .contact-section {
+    padding: 32px 0 100px; /* dial: 초소형 화면 아래 여백 */
+  }
+  .contact-text {
+    line-height: 1.5;
+  }
+
+  /* 푸터: 라벨/값 좌우 -> 위아래 스택 */
+  .footer-row {
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 4px;
+  }
+  .footer-label {
+    width: auto;
+    font-size: 12px;
+  }
+  .footer-value {
+    font-size: 13px;
+  }
+  .footer-info {
+    gap: 14px; /* dial: 모바일 정보 행 간격 */
+    margin-bottom: 48px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 }
